@@ -1,0 +1,333 @@
+<header>
+    <!-- <center><h2 >drinkr</h2></center>
+    <a class="logout center-block" href="/logout"> -->
+    <div style="margin-top:15px">
+      <h2 style = "margin-left:2%;display:inline">drinkr</h2>
+        <!--<div id = "floatwrapper" style="width:100%">
+          <div class="help-button">
+            <a class="logout" href="/logout">
+              Help
+            </a>
+          </div>
+          <div class="logout-button">
+            <a class="logout" href="/logout">
+              Logout
+            </a>
+          </div>
+        </div>-->
+      <div class = "btn-group" role="group" id="topbuttons" style="display:inline-block;float:right; margin-right:2%;">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#addDrink">Add a New Drink</button>
+        <div class="dropdown">
+        <div class="btn-group">
+        <button type="button" class="btn btn-secondary">Drink Type</button>
+        <button type="button" data-toggle="dropdown" id="drinktype" aria-haspopup="true" aria-expanded="false" class="btn btn-secondary dropdown-toggle">
+          <span class="caret"></span>
+          <span class="sr-only">Toggle Dropdown</span>
+        </button>
+
+        <ul class="dropdown-menu drinktypes" aria-labelledby="drinktype">
+          <li><a href="#">All</a></li>
+          <li><a href="#">Alcohol</a></li>
+          <li><a href="#">Coffee</a></li>
+          <li><a href="#">Smoothie</a></li>
+          <li><a href="#">Other</a></li>
+        </ul>
+        </div>
+        </div>
+
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#help">Help</button>
+        <button type="button" class="btn btn-secondary"><a href = "/logout">Logout</a></button>
+      </div>
+    </div>
+    <!--<div class="search">
+        <svg class="search-icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+            <path fill="#4fa6de" d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
+        </svg>
+        <input class="filtered-search" placeholder="Search username or messages" autocomplete="off" />
+    </div>-->
+    <!-- Vote JS -->
+    <script src="/js/vote.js"></script>
+    <!-- Category JS
+    <script src="/js/categories.js"></script>
+    -->
+</header>
+<section>
+
+    <div id="inner">
+        <!--<form id="send_message" action="">
+            <input id="user_input" placeholder="Type a new message and hit enter!" autocomplete="off" />
+        </form>-->
+        <!--<br><button type="button" class="btn btn-secondary btn-lg btn-block" data-toggle="modal" data-target="#addDrink">Add a New Drink</button>-->
+
+        <u><h2>Explore Drinks</u><img src="../img/drink.png" id="drinkimg"></h2>
+
+        <div class="dropdown">
+        <div class="btn-group">
+        <button type="button" class="btn btn-secondary">Drink Type</button>
+        <button type="button" data-toggle="dropdown" id="drinktype" aria-haspopup="true" aria-expanded="false" class="btn btn-secondary dropdown-toggle">
+          <span class="caret"></span>
+          <span class="sr-only">Toggle Dropdown</span>
+        </button>
+
+        <ul class="dropdown-menu drinktypes" aria-labelledby="drinktype">
+          <li><a href="#">All</a></li>
+          <li><a href="#">Alcohol</a></li>
+          <li><a href="#">Coffee</a></li>
+          <li><a href="#">Smoothie</a></li>
+          <li><a href="#">Other</a></li>
+        </ul>
+        </div>
+        </div>
+
+        <!--<ul id="messages">
+            {{#each newsfeed}}
+            <hr>
+            <li>
+                <div class="user">
+                    <div class="user-image">
+                        <img src="{{user.photo}}" alt="">
+                    </div>
+                    <div class="user-info">
+                        <span class="username">{{user.username}}</span>
+                        <br/>
+                        <span class="posted">{{posted}}</span>
+                    </div>
+                </div>
+                <div class="message-content">
+                    {{message}}
+                </div>
+            </li>
+            {{/each}}
+        </ul>-->
+        <span id = "commentedDrinkBool" style="display:none">{{previousDrink}}</span>
+        <span id = "commentedDrink" style="display:none">{{previous}}</span>
+        <ul id="drinks" class="items">
+            {{#each data}}
+            <hr>
+            <li class = "drink {{type}}">
+              <div class="caption-box">
+                <div class="right">
+                <div class="score unvoted" id="{{name}}">
+                    <span class="arrow up"><i class="glyphicon glyphicon-chevron-up"></i></span>
+                    <span class="score upvote">{{upvotes}}</span></br>
+                    <span class="arrow down"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                    <span class="score downvote">{{downvotes}}</span>
+                </div>
+                </div>
+              </div>
+                <h3>{{this.name}}</h3>
+
+
+
+                <span class="glyphicon glyphicon-glass"></span><i><b> {{type}}</i></b></p><br><br>
+                <div class="description">{{{description}}}</div>
+
+
+                    <div class="commentbutton" style="text-align:right"><button class="viewcomments link" style="border: 1px solid #AAAAAA; padding: 5px 5px 5px 5px;border-radius: 8px">View/Add Comments<span class="glyphicon glyphicon-comment" style="margin-left:5px"></span></button></div>
+
+                <div class="commentscontainer" style="display:none">
+                  <h4>Comments</h4>
+                  <ul class="comments">
+                    {{#each comments}}
+                    <li class="comment">
+                      {{this.text}}
+                    </li>
+                    {{/each}}
+                  </ul>
+                  <form action="/comments" method="post" class="form-inline addCommentForm"><br>
+                    <div class="form-group" style="width:100%">
+                      <div class="col-md-9" style="padding:0px 2px">
+                        <input type="text" class="form-control" name="text" style="width:100%" placeholder="Enter your comment...">
+                        <input type="hidden" name="name" class="drinkNameInput">
+                      </div>
+                      <div class="col-md-3" style="padding:0px 2px">
+                    	   <input type="submit" class="btn btn-secondary" value="Submit Comment" style="width:100%">
+                      </div>
+                    </div>
+                  </form>
+                </div>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+</section>
+<!-- START ADD MODAL-->
+<div class="modal fade" id="addDrink" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title" id="exampleModalLabel">Please tell us about your drink</h2>
+            </div>
+            <div class="modal-body">
+                <form method="POST" name="modalForm" class="form-horizontal ws-validate" id="addDrinkForm" action="drinks">
+                    <div class="form-group">
+                        <label for="modalName" class="col-sm-2 control-label">Drink Name</label>
+                        <div class="col-sm-10">
+                            <input name="name" type="text" class="form-control" id="modalName" placeholder="Please enter the name of your drink" required>
+                            <p class="help-block" id="invalidName">This field is required.</p>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="modalType" class="col-sm-2 control-label">Drink Type</label>
+                        <div class="col-sm-10">
+                          <select class="form-control" id="modalType" name="type">
+                            <option value="Alcohol">Alcohol</option>
+                            <option value="Coffee">Coffee</option>
+                            <option value="Smoothie">Smoothie</option>
+                            <option value="Other">Other</option>
+                          </select>
+                            <p class="help-block" id="invalidType">idk</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="modalDescription">Description</label>
+                        <div class="col-sm-10">
+                            <textarea name="description" rows="4" class="form-control" id="modalDescription" placeholder="Please enter a description of your drink" required></textarea>
+                            <p class="help-block" id="invalidDescription">Please fill in the description.</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-7">
+
+
+                            <button type="submit" class="btn btn-primary" id="okbutton" disabled style="padding-left: 30px; padding-right: 30px">Submit Drink</button>
+
+                            <button class="btn btn-warning" data-dismiss="modal" id="cancelbutton">Cancel</button>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END ADD MODAL-->
+<div class="modal fade" id="help" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title" id="exampleModalLabel">ABOUT DRINKR</h2>
+            </div>
+            <div class="modal-body">
+              Drinkr is a site that allows users to post their favorite drinks and have other people comment on them.
+              Our goal is to provide a way for drink enthusiasts to share their special orders with each other.<br><br>
+
+              <ul style = "list-style-type: decimal" id = "helplist"><h3>HELP AND DOCUMENTATION:</h3>
+                <li>Start by clicking the "Add a New Drink" button. Feel free to add a drink, and hit "Submit Drink" to add your drink, or "Cancel" to make a different one.</li>
+                <li>Check out some of the other drinks posted by people, you'll be surprised by what you find. People are quite creative!</li>
+                <li>You can click the arrows on the right side of each post to up vote or down vote a user's drink. An up vote means you liked their drink, and a down vote means you did not like their drink.</li>
+                <li>You can add or view comments, to see what other people thought of the drinks. Have fun and enjoy discussing drinks in a more creative way.</li>
+            </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    &copy; 2016. COGS 121 Spring 2016<br><br>
+</footer>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/socket.io.min.js"></script>
+<script src="./js/chatbox.js"></script>
+<script src="./js/search.js"></script>
+
+<script type = "text/javascript">
+  $(function(){
+    jQuery.fn.extend({
+      disable: function(state) {
+        return this.each(function() {
+          this.disabled = state;
+        });
+      }
+    });
+    $('#drinkimg').height($('h2').height());
+    $('.viewcomments').click(function(){
+      if($(this).text() == "Hide Comments")
+      {
+        $(this).html("View/Add Comments<span class=\"glyphicon glyphicon-comment\" style=\"margin-left:5px\"></span>");
+        $(this).parent().next().css("display", "none");
+      }
+      else {
+        $(this).html("Hide Comments<span class=\"glyphicon glyphicon-comment\" style=\"margin-left:5px\"></span>");
+        $(this).parent().next().css("display", "block");
+      }
+
+    });
+    $('#modalName').focusout(function(){
+      if(!$('#modalName').val())
+      {
+        $('#okbutton').disable(true);
+        $('#invalidName').css("display", "block");
+      }
+    });
+    $('#modalName').on('input', function(e){
+      $('#okbutton').disable(false);
+      $('#invalidName').css("display", "none");
+    });
+    var previousDrink = $('#commentedDrink').text();
+    if(previousDrink.length == 0)
+      previousDrink = "random string no one will ever call their drink8g78";
+    console.log(previousDrink);
+    $("h3:contains(\'"+ previousDrink +"\')").parent().find('.viewcomments').trigger("click");
+    //$("h3[text = \'"+ previousDrink +"\']").parent().find('.commentbutton').trigger("click");
+    //console.log("new things" + $("h3[text = \'"+ previousDrink +"\']").text());
+    //console.log("new things " + $("h3:contains(\'"+ previousDrink +"\')").parent().find('.viewcomments').text());
+
+    $('.addCommentForm').submit(function() {
+      //console.log("sup " + $(this).parent().parent().find('h3').text());
+      $(this).find('.drinkNameInput').val($(this).parent().parent().find('h3').text());
+      return true;
+    });
+
+    // sort by category
+    $('ul.drinktypes li a').click(function(e) {
+    var category = $(this).text().toLowerCase();
+    if(category == "all")
+    {
+      console.log("if statement reached");
+      $('ul.items li').show();
+    }
+
+    else 
+    {
+      
+      $('ul.items li').hide();
+
+      /*
+      $.each(category, function(i, v) {
+        $('ul.items li.' + v.trim()).show();
+      });
+      */
+      
+      if(category == "alcohol")
+      {
+        $('ul.items li.Alcohol').show();   
+      } 
+      else if(category == "coffee")
+      {
+        $('ul.items li.Coffee').show(); 
+      } 
+      else if(category == "smoothie")
+      {
+        $('ul.items li.Smoothie').show(); 
+      } 
+      else
+      {
+        $('ul.items li.Other').show(); 
+      }   
+      
+    }
+    });
+  });
+    /*$('#addDrinkForm').submit(function(){
+      $('#modalDescription').val($('#modalDescription').val().replace(/(?:\r\n|\r|\n)/g, '<br />'));
+      return true;
+    });
+    $('.drink').click(function(){
+      $(this).css("background-color", "#eeeeee");
+    })});*/
+</script>
